@@ -238,18 +238,29 @@ async function loadMap() {
 
 
     // Count visitors per country
-    const countryCounts = {};
+  const countryCounts = {};
 
-    visitors.forEach(visitor => {
+const countryNames = {
+    "Norway": "578",
+    "Germany": "276",
+    "France": "250"
+};
 
-        if (!countryCounts[visitor.country]) {
-            countryCounts[visitor.country] = 0;
+visitors.forEach(visitor => {
+
+    const code = countryNames[visitor.country];
+
+    if (code) {
+
+        if (!countryCounts[code]) {
+            countryCounts[code] = 0;
         }
 
-        countryCounts[visitor.country]++;
+        countryCounts[code]++;
 
-    });
+    }
 
+});
 
     svg.selectAll("path")
         .data(countries.features)
