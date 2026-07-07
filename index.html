@@ -283,7 +283,7 @@ visitors.forEach(visitor => {
     .enter()
     .append("path")
     .attr("d", path)
- .on("mouseover", function(event, d) {
+.on("mouseover", function(event, d) {
 
     const name = d.properties.name;
     const visitors = countryCounts[name] || 0;
