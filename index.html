@@ -262,11 +262,31 @@ visitors.forEach(visitor => {
 
 });
 
-    svg.selectAll("path")
-        .data(countries.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
+   svg.selectAll("path")
+    .data(countries.features)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    .on("mouseover", function(event, d) {
+
+        const name = d.properties.name;
+        const visitors = countryCounts[name] || 0;
+
+        d3.select(this)
+            .attr("stroke-width", 2);
+
+        alert(
+            name + "\n" +
+            visitors + " visitors checked in"
+        );
+
+    })
+    .on("mouseout", function() {
+
+        d3.select(this)
+            .attr("stroke-width", 0.5);
+
+    })
         .attr("stroke", "white")
        .attr("fill", function(d) {
 
