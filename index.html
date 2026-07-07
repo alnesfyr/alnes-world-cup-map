@@ -241,9 +241,9 @@ async function loadMap() {
   const countryCounts = {};
 
 const countryNames = {
-    "Norway": "578",
-    "Germany": "276",
-    "France": "250"
+    "Norway": "Norway",
+    "Germany": "Germany",
+    "France": "France"
 };
 
 visitors.forEach(visitor => {
@@ -270,7 +270,7 @@ visitors.forEach(visitor => {
         .attr("stroke", "white")
        .attr("fill", function(d) {
 
-    const country = countryCounts[d.id];
+    const country = countryCounts[d.properties.name];
 
     if (!country) {
         return "#1b7a45";
