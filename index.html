@@ -54,22 +54,19 @@ select, input {
     margin: 8px;
     border-radius: 8px;
     border: 1px solid #ccc;
-}
-
-#countries {
+    
+}#countries {
     margin-top: 20px;
 }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+
 </head>
 
 <body>
-
-<header>
-<h1>⚽ Alnes Fyr World Cup Passport 🌍</h1>
-<p>Help us fill the world map with visitors from around the world!</p>
-</header>
-
+    
 <div class="counter">
 🌍 Countries visited: <span id="countryCount">0</span>
 </div>
