@@ -52,12 +52,23 @@ select, input {
     width: 90%;
     padding: 12px;
     margin: 8px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    
-}#countries {
+border-radius: 8px;
+border: 1px solid #ccc;
+
+}
+
+#countries {
     margin-top: 20px;
 }
+
+#worldMap {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -73,7 +84,7 @@ select, input {
 
 <div class="card">
     <h2>🌍 Visitor World Map</h2>
-    <svg id="worldMap" width="900" height="500"></svg>
+  <svg id="worldMap" viewBox="0 0 900 500"></svg>
 </div>
 
 <div class="card">
