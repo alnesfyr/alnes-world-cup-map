@@ -195,8 +195,7 @@ countries.join(" 🌍 ");
 loadCountries();
 
 </script>
-
-    <script>
+<script>
 
 const mapWidth = 900;
 const mapHeight = 500;
@@ -211,24 +210,63 @@ const path = d3.geoPath()
     .projection(projection);
 
 
-d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
-.then(worldData => {
+async function loadMap() {
+
+    // Get world map
+    const worldData = await d3.json(
+        "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
+    );
 
     const countries = topojson.feature(
         worldData,
         worldData.objects.countries
     );
 
+
+    // Get visitor data from Supabase
+    const response = await fetch(
+        SUPABASE_URL + "/rest/v1/visitors",
+        {
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": "Bearer " + SUPABASE_KEY
+            }
+        }
+    );
+
+    const visitors = await response.json();
+
+
+    // Count visitors per country
+    const countryCounts = {};
+
+    visitors.forEach(visitor => {
+
+        if (!countryCounts[visitor.country]) {
+            countryCounts[visitor.country] = 0;
+        }
+
+        countryCounts[visitor.country]++;
+
+    });
+
+
     svg.selectAll("path")
         .data(countries.features)
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("fill", "#1b7a45")
         .attr("stroke", "white")
-        .attr("stroke-width", 0.5);
+        .attr("fill", function(d) {
 
-});
+            // temporary default color
+            return "#1b7a45";
+
+        });
+
+}
+
+loadMap();
 
 </script>
     
