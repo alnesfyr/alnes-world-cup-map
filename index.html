@@ -125,7 +125,7 @@ alert("Please choose your country!");
 return;
 }
 
-await fetch(
+let response = await fetch(
 SUPABASE_URL + "/rest/v1/visitors",
 {
 method:"POST",
@@ -140,6 +140,13 @@ city:city,
 name:name
 })
 });
+
+let result = await response.text();
+
+if (!response.ok) {
+alert("Error: " + result);
+return;
+}
 
 alert("🎉 Welcome to Alnes Fyr! Your country has been added!");
 
