@@ -257,12 +257,19 @@ async function loadMap() {
         .append("path")
         .attr("d", path)
         .attr("stroke", "white")
-        .attr("fill", function(d) {
+       .attr("fill", function(d) {
 
-            // temporary default color
-            return "#1b7a45";
+    const country = countryCounts[d.id];
 
-        });
+    if (!country) {
+        return "#1b7a45";
+    }
+
+    const intensity = Math.min(country / 10, 1);
+
+    return `rgba(0, 255, 100, ${intensity})`;
+
+});
 
 }
 
