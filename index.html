@@ -304,6 +304,28 @@ visitors.forEach(visitor => {
 
 });
 
+const sortedCountries = Object.entries(countryCounts)
+    .sort((a, b) => b[1] - a[1]);
+
+const medals = ["🥇", "🥈", "🥉"];
+
+let leaderboardHTML = "";
+
+sortedCountries.forEach((country, index) => {
+
+    const medal = medals[index] || `${index + 1}.`;
+
+    leaderboardHTML += `
+        <div class="leaderboard-row">
+            <span>${medal} ${country[0]}</span>
+            <span>${country[1]} 👥</span>
+        </div>
+    `;
+
+});
+
+document.getElementById("leaderboard").innerHTML = leaderboardHTML;
+    
    svg.selectAll("path")
     .data(countries.features)
     .enter()
