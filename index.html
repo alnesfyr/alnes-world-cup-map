@@ -303,6 +303,25 @@ async function loadMap() {
 
     const visitors = await response.json();
 
+    const latestVisitors = visitors
+    .slice(-5)
+    .reverse();
+
+let feedHTML = "";
+
+latestVisitors.forEach(visitor => {
+
+    feedHTML += `
+        <div class="feed-item">
+            <div class="feed-time">🟢 Recent check-in</div>
+            <strong>${visitor.name}</strong><br>
+            📍 ${visitor.city}, ${visitor.country}
+        </div>
+    `;
+
+});
+
+document.getElementById("liveFeed").innerHTML = feedHTML;
 
     // Count visitors per country
   const countryCounts = {};
